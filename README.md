@@ -1,12 +1,12 @@
 # OPIGS_SE_Lab
 
 # Installing the software for local run
-run pip install -r requirements.txt to install requirements
-python manage.py migrate
-python manage.py runserver
-http://127.0.0.1:8000/ run this link
+run pip install -r requirements.txt to install requirements  
+python manage.py migrate  
+python manage.py runserver  
+http://127.0.0.1:8000/ run this link  
 
-#Software Deployed at
+# Software Deployed at
 ## https://opigs.herokuapp.com
 
 
