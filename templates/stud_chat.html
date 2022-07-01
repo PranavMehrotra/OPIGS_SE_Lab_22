@@ -1,0 +1,189 @@
+<html>
+
+<head>
+  <title>Chats</title>
+  <style>
+    body {
+      background-color: #0E1A35;
+      color: black;
+      border: 4px solid white;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    form {
+      margin: auto !important;
+
+      {% load static %}
+      background: #efe7dd url("{% static '/2.jpg'%}") repeat;
+      border: 2px solid black;
+      padding: 4px;
+      border-radius:10px;
+      margin:1vw;
+      width:50vw;
+      margin-top:5vh;
+      margin-bottom:5vh !important;
+    }
+
+    p {
+      margin-bottom: -4vh
+    }
+
+    .chat {
+      width: 20vw;
+      padding: 2vh;
+      word-wrap: break-word;
+      padding-left:1%;
+      padding-top:2vh;
+      border-radius:4px;
+      box-shadow: 10px 5px 3px #d6d6d6;
+    }
+
+    #name {
+      background-color: #005E54;
+      height: 8vh;
+      margin-bottom: 2vh;
+      box-shadow: none;
+      position: relative;
+      top: -3.2vh;
+      border-radius: 10px;
+      padding-left: 9vw;
+      left: -0.5vw;
+      width: 84%;
+    }
+
+    #textbox {
+      position: relative;
+      top: 2vh;
+      {% load static %}
+      background: #efe7dd url("{% static '/2.jpg'%}") repeat;
+      padding: 4px;
+      border-radius:10px;
+      margin:1vw;
+      width:48vw;
+    }
+
+    .back {
+      border: 2px solid back;
+      background-color: white;
+      border-radius: 10px;
+      margin: auto;
+      color: black;
+      padding: 2vh;
+      width: 15vw;
+      text-align: center;
+    }
+
+    .back a {
+      text-decoration: none;
+      font-size: 1.5em;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+  <h1 style="padding-left:1vw;text-align:center;color:white;">Welcome to Chat Portal</h1>
+  {% if user.is_student%}
+
+  <h4 style="padding-left:1vw;text-align:center;color:white;">You are logged in as {{user}}</h4>
+
+
+  <ol style="list-style-type:none">
+    {% for x in alum%}
+    {% load static %}
+    <div class="form-group">
+      <li>
+        <form action="{% url whereto %}" enctype="multipart/form-data" method="POST">
+          {% csrf_token %}
+          <div id="name">
+            {% load static %}
+
+            <a href="{% url 'index' %}"><i class="material-icons"
+                style="color:white;float:left;position:relative; left:-8vw;top:2vh">arrow_back</i></a>
+            <p><img src="{% static '/1.png'%}"
+                style="border-radius:50%; height:6vh;position:relative; left:-6vw;top:1vh;">
+            <p style="color:white; font-size:1.2em; position:relative; top:-3vh;left:-1vw">{{x}}
+              <i class="material-icons" style="float:right">attach_file</i><i class="material-icons"
+                style="float:right;padding-right:2.5vw;">call</i><i class="material-icons"
+                style="float:right;padding-right:3vw;">email</i>
+            </p>
+            </p><br>
+          </div>
+          {% for text in chat%}
+          {% if text.alum_username == x%}
+          {% if text.Sender == "S" %}
+          <p class="chat" style="background-color:white;margin-left:2vw;">{{text.chat}}</p><br>
+          {% else %}
+          <p style="position:relative;left:26vw;background-color:yellow;" class="chat"> {{text.chat}}</p><br>
+          {% endif%}
+          {% endif %}
+          {% endfor %}
+          <div id="textbox">
+            <input type="text" name="feed" style="width:35vw; border-radius:8px; height:5vh;padding-left:1vw;"></input>
+            <button type="submit" name="alum_id" value={{x}} style="border:none;position:relative; top:2vh;"><img
+                src="{% static '/3.jpg' %}" height=40px width=40px
+                style="border:none; border-radius:50%; cursor:pointer;"></button>
+          </div>
+        </form>
+      </li>
+      {% empty %}
+      <div style="color:white;"> No Alumni available </div>
+      {% endfor %}
+    </div>
+
+  </ol>
+
+  {%elif user.is_alumni%}
+  <h4 style="padding-left:1vw;text-align:center;color:white;">You are logged in as {{user}}</h4>
+  <ol style="list-style-type:none">
+    {% for x in alum%}
+    {% load static %}
+    <div class="form-group">
+      <li>
+        <form action="{% url whereto %}" enctype="multipart/form-data" method="POST">
+          {% csrf_token %}
+          <div id="name">
+            {% load static %}
+            <a href="{% url 'index' %}"><i class="material-icons"
+                style="color:white;float:left;position:relative; left:-8vw;top:2vh">arrow_back</i></a>
+            <p><img src="{% static '/1.png'%}"
+                style="border-radius:50%; height:6vh;position:relative; left:-6vw;top:1vh;">
+            <p style="color:white; font-size:1.2em; position:relative; top:-3vh;left:-1vw">{{x}}
+              <i class="material-icons" style="float:right">attach_file</i><i class="material-icons"
+                style="float:right;padding-right:2.5vw;">call</i><i class="material-icons"
+                style="float:right;padding-right:3vw;">email</i>
+            </p>
+            </p><br>
+          </div>
+          {% for text in chat%}
+          {% if text.stud_username == x%}
+          {% if text.Sender == "A" %}
+          <p class="chat" style="background-color:white;margin-left:2vw;">{{text.chat}}</p><br>
+          {% else %}
+          <p style="position:relative;left:26vw;background-color:yellow;" class="chat"> {{text.chat}}</p><br>
+          {% endif%}
+          {% endif %}
+          {% endfor %}
+          <div id="textbox">
+            <input type="text" name="feed" style="width:35vw; border-radius:8px; height:5vh;padding-left:1vw;"></input>
+            <button type="submit" name="alum_id" value={{x}} style="border:none;position:relative; top:2vh;"><img
+                src="{% static '/3.jpg' %}" height=40px width=40px
+                style="border:none; border-radius:50%; cursor:pointer;"></button>
+          </div>
+        </form>
+      </li>
+      {% empty %}
+      <div style="color:white;"> No Student available </div>
+      {% endfor %}
+    </div>
+
+  </ol>
+  {%endif%}
+  <div class="back">
+    <a href="{% url 'index' %}">Go Back</a>
+  </div>
+
+</body>
+
+</html>

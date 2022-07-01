@@ -1,0 +1,17 @@
+Found 1 test(s).
+### Successful Sign up ###
+
+
+
+### invalid Email format Sign up ###
+<ul class="errorlist"><li>email<ul class="errorlist"><li>Enter a valid email address.</li></ul></li></ul>
+
+
+### Password mismatch sign up failure ###
+<ul class="errorlist"><li>password2<ul class="errorlist"><li>The two password fields didn’t match.</li></ul></li></ul>
+
+
+### Empty field sign up failure ###
+<ul class="errorlist"><li>address<ul class="errorlist"><li>This field is required.</li></ul></li></ul>
+
+

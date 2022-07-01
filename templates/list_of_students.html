@@ -1,0 +1,79 @@
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+    integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <title>List of Students Applied</title>
+  <style>
+    body {
+      background-color: #0E1A35;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mx-auto">
+          <div class="card" style="margin-top:10vh;border:4px solid white;">
+            <div class="card-header text-white" style="background-color:#0E1A35">
+              <h2 style="padding-left:25vw;">List of Students Applied</h2>
+              {% comment %} <h6 style="padding-left:15vw;">You would be able to chat with your alumni only when he
+                approves your request</h6> {% endcomment %}
+            </div>
+            <div class="card-body">
+              <ol>
+
+                {% for alum in list_of_studs %}
+                <div class="form-group">
+                  <li style="margin-bottom:5vh;list-style-type:none;font-size:1.2em">
+                    <form action="{% url whereto %}" enctype="multipart/form-data" method="POST">
+                      {% csrf_token %}
+                      <div class="btn-group col-md-7"> {{alum.first_name}} {{alum.last_name}}
+                        <button type="submit" name="stud_id" value={{alum.id}} class="btn btn-block btn-primary ml-5"
+                          style="width:15vw;position:absolute;left:25vw;">View CV</button>
+                          {% if alum.id in list_of_short_studs %}
+                          <button class="btn btn-block btn-secondary ml-5"
+                          style="width:15vw;position:absolute;left:45vw;" disabled>Shortlisted</button>
+                          {% else %}
+                          <button type="submit" name="stud_shortlist_id" onclick = "giveAlert(event,'{{alum.first_name}}','{{alum.last_name}}')" value={{alum.id}} class="btn btn-block btn-success ml-5"
+                          style="width:15vw;position:absolute;left:45vw;">Shortlist</button>
+                          {% endif %}
+                          {% comment %} {%if alum.id is flag%}
+                        <p style="color:red">No CV Found</p>
+                        {% endif %} {% endcomment %}
+                      </div>
+                    </form>
+                  </li>
+                </div>
+                {% empty %}
+                <div> No Apply requests </div>
+                {% endfor %}
+              </ol>
+              <a href="/accounts/index/"
+                style="color:black; position:relative;left:30vw;font-size:1.5em;">Go Back</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  <script type="text/javascript">
+    {% comment %} {{alum.first_name}},{{alum.last_name}} {% endcomment %}
+    {% comment %} "Confirm the registration of student named " + firstn + " " + lastn + "\n" {% endcomment %}
+    function giveAlert(event,firstn,lastn) {
+      if (!window.confirm("Confirm the shortlisting of student named " + firstn + " " + lastn + "\n")) {
+        event.preventDefault();
+      }
+    }
+  </script>
+</body>
+
+</html>

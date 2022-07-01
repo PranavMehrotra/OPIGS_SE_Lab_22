@@ -1,0 +1,428 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Homepage</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    {% load static %}
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">	
+	<style>
+    .accordion {
+      background-color:#151565 ;
+      color: white;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+      transition: 0.4s;
+      margin-top:10px;
+      border-radius:20px;
+    }
+    
+    .active, .accordion:hover {
+      background-color: #122143;
+    }
+    
+    .accordion:after {
+      content: '\002B';
+      color: #777;
+      font-weight: bold;
+      float: right;
+      margin-left: 5px;
+    
+    }
+    
+    .active:after {
+      content: "\2212";
+      
+    }
+    
+    .panel {
+      padding: 0px 18px;
+      background-color: white;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+      margin-top:10px;
+    }
+    #heading{
+      text-align:center;
+      position:relative;
+      padding-top:20vh;
+      font-size:4em;
+      animation-name:moveInLeft;
+      animation-duration:2s;
+      animation-delay: 0.1s;
+    }
+    @keyframes moveInLeft{
+      0%{
+        opacity:0;
+        left:-3.5vw;
+      }
+      15%{
+        opacity:0.25;
+        left:-3vw;
+        }
+      35%{
+        opacity:0.5;
+        left:-2.5vw;
+        }
+
+      50%{
+        opacity:0.75;
+        left:-2vw;
+      }
+      70%{
+        left:-1.5vw;
+      }
+      80%{
+        left:0.5vw;
+      }
+      100%{
+        opacity:1;
+        left:0;
+      }
+    }
+    #headingname{
+      text-align:center;
+      position:relative;
+      padding-top:3vh;
+      font-size:2em;
+      animation-name:moveInRight;
+      animation-duration:2s; 
+      animation-delay: 0.1s;
+    }
+    @keyframes moveInRight{
+      0%{
+        opacity:0;
+        left:3.5vw;
+      }
+      15%{
+        opacity:0.25;
+        left:3vw;
+        }
+      35%{
+        opacity:0.5;
+        left:2.5vw;
+        }
+
+      50%{
+        opacity:0.75;
+        left:2vw;
+      }
+      70%{
+        left:1.5vw;
+      }
+      80%{
+        left:-0.5vw;
+      }
+      100%{
+        opacity:1;
+        left:0;
+      }
+    }
+    #navlink{
+     top:0;
+     position:absolute;
+     background-color:rgb(27, 27, 53);
+     width:99vw;
+     margin:auto;
+     height:10vh;
+     padding-left:10vw !important;
+     padding-top:3vh !important;
+    }
+    #navlink a{
+      color:rgb(255, 255, 255);
+      text-decoration:none;
+      margin-left:5vw;
+      padding-bottom:3vh;
+      border:none;
+      cursor: pointer;
+     }
+    #navlink a:hover{
+      color:white !important;
+      border-bottom:5px white solid;
+    }
+	</style>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	</head>
+	<body class="is-preload" ">
+    {%if status == 0 %}
+    <meta http-equiv="refresh" content="0.1; url =/accounts/index/" />
+    {% elif user.is_student%}
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header" style="border:none;">
+								 <h3 style="position:relative;top:2vh">Welcome to the student portal
+									 </h3>
+										
+										<div class="dropdown">
+											<p style="color:black;float:right;position:relative;top:-2.5vh;left:-0.2vw;">{{student.roll_number}}</p>
+											<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" style="width:5vw;height:5vw; border-radius:50%;background-color:white; border:none;float:right;position:relative;left:4vw;">
+                        {% load static %}
+                        <img src="{% static '/1.png' %}" style="height:5vw;border-radius:50%;position:relative; top:-6px;left:-12px">
+                                        </button>
+											<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2" style="padding-right:0.5vw;">
+											  <li><a class="dropdown-item" href="{% url 'student_edit' %}">Edit Profile</a></li>
+											  <li><a class="dropdown-item" href="{% url 'apply_company' %}">Apply</a></li>
+											  <li><hr class="dropdown-divider"></li>
+											  <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+											</ul>
+										  </div>
+											
+										
+										</header>
+										<hr style="border:2px solid black;">
+							<!-- Banner -->
+								<section id="banner">
+									<div class="content">
+										<header>
+											<p>Name: {{student.user.first_name}} {{student.user.last_name}}</p>
+											<p>Email id: {{student.user}}</p>
+											<p>Roll number: {{student.roll_number}}</p>
+											<p>Department: {{student.department}}</p>
+										</header>
+										</div>
+								</section>
+                {% if cvs%}
+                <ol style="list-style-type:none">
+                  {% load static%}
+                    {% if cvs.sd %} <li style="padding-bottom:2vh;"> <a href= "{{cvs.sd.url}}" target="_blank" style="text-decoration:none;color:black;font-size:1.2em;border:none"><img src="{%static '/4.png' %}" height=30vh> Software Development </a> {% endif %}
+                    {% if cvs.da %} <li> <a href= "{{cvs.da.url}}" target="_blank" style="text-decoration:none;color:black;font-size:1.2em;border:none"><img src="{%static '/4.png' %}" height=30vh> Data Analytics </a> {% endif %}
+                    {% if not cvs.sd and not cvs.da %}No CVs uploaded.{% endif %}
+                        
+                </ol>
+                {%else%}
+                <a href = "{% url 'get_cv'%}" style="border-radius:10px; border:2px solid black;padding:2vh;text-decoration:none;color:black;"> View CV</a><br><br><br>
+                {%endif%}
+
+                <p style="font-size:1.5em;text-align:center" id="notifi"> Notifications </p>
+                {% for i in notif%}
+                <button class="accordion">{{i.Subject}} {{i.Date}}</button>
+                <div class="panel">
+                  <p>{{i.Notification}}</p>
+                </div>
+                {% empty %}
+                <div> No New Notifications</div>
+                {% endfor %}
+            
+					</div>
+					</div>
+				<!-- Sidebar -->
+        <div id="sidebar" style="width:20vw">
+          <div class="inner">
+            <!-- Menu -->
+              <nav id="menu">
+                <header class="major">
+                <h2 style="border:none;font-size:1.5em;padding-left:2vw;">IIT Kharagpur</h2>
+                </header>
+                <ul class="item">
+                  <li><a href="{% url 'student_edit' %}">Edit Profile</a></li>
+                  <li><a href="{% url 'apply_company' %}">Apply</a></li>
+                  <li><a href="#notifi">Notifications</a></li>
+                  <li><a href="{% url 'request_feedback' %}">Request Feedback</a></li>
+                  <li><a href="{% url 'chats'%}">Chat</a></li>
+                  <li><a href="{% url 'logout'%}">Logout</a></li>
+                  </ul>
+              </nav>
+          </div>
+        </div>
+    </div>
+                      
+      <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+        
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+            } 
+          });
+        }
+        </script>
+        {%elif user.is_company%}
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header" style="border:none;">
+								 <h3 style="position:relative;top:2vh">Welcome to the Company portal
+									 </h3>
+									
+										
+										<div class="dropdown">
+											<p style="color:black;float:right;position:relative;top:-2.5vh;left:-0.2vw;">{{company.company_name}}</p>
+											<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" style="width:5vw;height:5vw; border-radius:50%;background-color:white; border:none;float:right;position:relative;left:4vw;">
+                        {% load static %}
+                        <img src="{% static '/1.png' %}" style="height:5vw;border-radius:50%;position:relative; top:-6px;left:-12px">
+                                        </button>
+											<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2" style="padding-right:0.5vw;">
+											  <li><a class="dropdown-item" href="{% url 'company_edit' %}">Edit Profile</a></li>
+											  {% comment %} <li><a class="dropdown-item" href="{% url 'apply_company' %}">Apply</a></li> {% endcomment %}
+											  <li><hr class="dropdown-divider"></li>
+											  <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+											</ul>
+										  </div>
+											
+										
+										</header>
+										<hr style="border:2px solid black;">
+							<!-- Banner -->
+								<section id="banner">
+									<div class="content">
+										<header>
+											<p>Name:{{company.company_name}}</p>
+											<p>Email id: {{company.user}}</p>
+											<p>Profile: {{company.profile}}</p>
+											<p>Address: {{company.address}}</p>
+										</header>
+										</div>
+								</section>
+               
+               	</div>
+					</div>
+				<!-- Sidebar -->
+        <div id="sidebar" style="width:20vw">
+          <div class="inner">
+            <!-- Menu -->
+              <nav id="menu">
+                <header class="major">
+                <h2 style="border:none;font-size:1.5em;padding-left:2vw;">IIT Kharagpur</h2>
+                </header>
+                <form action="{% url 'company_details' %}" enctype="multipart/form-data" method="POST" id="comp_details"> 
+                  {% csrf_token %}
+              </form>
+                <ul class="item">
+                  <li><a href="{% url 'company_edit' %}">Edit Profile</a></li>
+                  {% comment %} <li><a href="#">Details</a></li> {% endcomment %}
+                  <li><button type = "submit" name= "comp_id" value= {{company.user.username}} form = "comp_details" style="background-color:transparent;border:none;color:white;" target="_blank">VIEW DETAILS PAGE</button></li>
+                  <li><a href="{% url 'list_of_students' %}">LIST OF APPLIED STUDENTS</a></li>
+                  <li><a href="{% url 'logout'%}">Logout</a></li>
+                  </ul>
+              </nav>
+          </div>
+        </div>
+    </div>
+    {% elif user.is_alumni%}
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header" style="border:none;">
+								 <h3 style="position:relative;top:2vh">Welcome to the Alumni portal
+									 </h3>
+									
+										
+										<div class="dropdown">
+											<p style="color:black;float:right;position:relative;top:-2.5vh;left:-0.2vw;">{{alumni.roll_number}}</p>
+											<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" style="width:5vw;height:5vw; border-radius:50%;background-color:white; border:none;float:right;position:relative;left:4vw;">
+                        {% load static %}
+                        <img src="{% static '/1.png' %}" style="height:5vw;border-radius:50%;position:absolute; top:0.05vh;right:0.02vw;">
+                        </button>
+											<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2" style="padding-right:0.5vw;">
+											  <li><a class="dropdown-item" href="{% url 'alumni_edit' %}">Edit Profile</a></li>
+											  <li><a class="dropdown-item" href="{% url 'feedback' %}">Approve feedback</a></li>
+											  <li><hr class="dropdown-divider"></li>
+											  <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+											</ul>
+										  </div>
+											
+										
+										</header>
+										<hr style="border:2px solid black;">
+							<!-- Banner -->
+								<section id="banner">
+									<div class="content">
+										<header>
+											<p>Name: {{alumni.user.first_name}} {{alumni.user.last_name}}</p>
+											<p>Email id: {{alumni.user}}</p>
+											<p>Roll number: {{alumni.roll_number}}</p>
+											<p>Department: {{alumni.department}}</p>
+                      <p>Year of Graduation: {{alumni.year_of_graduation}}</p>
+										</header>
+										</div>
+								</section>
+                <p style="font-size:1.5em;"> Pending Feedback Requests</p>
+                {% for i in stud%}
+                <div>{{i}}</div>
+                {% empty %}
+                <div> No Pending Feedback Requests </div>
+                {% endfor %}
+            
+					</div>
+					</div>
+				<!-- Sidebar -->
+        <div id="sidebar" style="width:20vw">
+          <div class="inner">
+            <!-- Menu -->
+              <nav id="menu">
+                <header class="major">
+                <h2 style="border:none;font-size:1.5em;padding-left:2vw;">IIT Kharagpur</h2>
+                </header>
+                <ul class="item">
+                  <li><a href="{% url 'alumni_edit' %}">Edit Profile</a></li>
+                  <li><a href="{% url 'feedback' %}">Approve requests</a></li>
+                  <li><a href="{% url 'chats'%}">Chat</a></li>
+                  <li><a href="{% url 'logout'%}">Logout</a></li>
+                  </ul>
+              </nav>
+          </div>
+        </div>
+    </div>
+
+{% else %}
+{% load static %}
+<div id="mainreg" style="background-image:url('{% static '/a.jpg' %}') ;background-color:#0e1a35; height:100vh;width:99vw;margin:auto;color:white;font-size:1.2em;clip-path: polygon(0 0, 100% 0%, 100% 95%, 0% 100%);background-size:cover">
+<img src="{% static '/b.png' %}" height=150vh width=200vh style="position:absolute; top:10vh;left:1vw;border-radius:5px">
+  <div id="heading" style="width:50%; margin:auto;font-family: 'Lucida Handwriting'">IIT Kharagpur</div>
+<div id="headingname" style="width:50%;margin:auto;font-family: 'Lucida Handwriting'">Placement Portal</div>
+<div id="navlink">
+<a href="{% url 'student_register' %}">Student Registration</a> 
+<a href="{% url 'alumni_register' %}">ALumni Registration</a> 
+<a href="{% url 'company_register' %}">Company Registration</a> 
+<a href="/admin/login/?next=/admin/">Admin Login</a> 
+<a href="{% url 'login' %}">Login</a>
+</div>
+</div> 
+{% endif %}
+
+  {% load static %}
+  <script src="{%static 'assets/js/jquery.min.js'%}"></script>
+  <script src="{%static 'assets/js/browser.min.js' %}"></script>
+  <script src="{%static 'assets/js/breakpoints.min.js' %}"></script>
+  <script src="{%static 'assets/js/util.js' %}"></script>
+  <script src="{%static 'assets/js/main.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+	</body>
+</html>

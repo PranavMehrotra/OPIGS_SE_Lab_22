@@ -1,0 +1,18 @@
+Found 14 test(s).
+### get page redirect and status checked ###
+### alumni_register page status and template checked ###
+### apply_company page status checked ###
+### company_details page status checked ###
+### get page redirect and status checked ###
+### company_info page status and template checked ###
+### company_register page status and template checked ###
+### feedback page status checked ###
+### feedback page status checked ###
+### list of students page status checked ###
+### Successful login checked ###
+--- Successful Login ---
+### Failed login checked ###
+--- Invalid Username or Password ---
+### request_feedback page status checked ###
+### get page redirect and status checked ###
+### student_register page status and template checked ###

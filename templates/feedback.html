@@ -1,0 +1,74 @@
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+    integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <title>Approve Feedback</title>
+  <style>
+    body {
+      background: #0E1A35;
+      padding-top: 2vh !important;
+      padding-bottom: 2vh !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <section>
+    <div class="container">
+      <div class="row" style="width:100vw;position:relative;left:-13vw;">
+        <div class="col-md-12 mx-auto">
+          <div class="card" style="border:5px solid white;">
+            <div class="card-header text-white" style="background-color:#0E1A35">
+              <h2 style="margin-left:40vw">Feedback</h2>
+            </div>
+            <form action="{% url 'get_stud_cv' %}" enctype="multipart/form-data" method="POST" id="view_cv">
+              {% csrf_token %}
+            </form>
+            <div class="card-body">
+              <ol>
+                {% for stud in stud_list%}
+                <div class="form-group">
+                  <li style="margin-bottom:5vh;list-style-type:none;font-size:1.2em">
+                    <form action="{% url whereto %}" enctype="multipart/form-data" method="POST">
+                      {% csrf_token %}
+
+                      <div class="btn-group col-md-7" style="margin-top:5vh;font-size:20px;"> {{stud.first_name}}
+                        {{stud.last_name}}
+                        <span>{% if stud.sd %}
+                          <a href={{stud.sd}} class="btn btn-block btn-primary ml-5" style="width:7vw;">View SDE CV</a>
+                          {% endif %}
+                          {% if stud.da %}
+                          <a href={{stud.da}} class="btn btn-block btn-primary ml-5" style="width:7vw;">View DA CV</a>
+                          {% endif %}
+                        </span>
+                        <input type="text" name="feed"
+                          style="margin-left:5vw;padding-left:2vw;width:20vw;position:absolute;left:20vw;font-size:1"></input>
+                        <button type="submit" name="alum_id" value={{stud.id}} class="btn btn-block btn-primary ml-5"
+                          style="width:15vw;position:absolute;left:45vw;">Send feedback</button>
+                      </div>
+                      {% empty %}
+                      <div> No Pending Feedback Requests </div>
+                      {% endfor %}
+
+                    </form>
+                  </li>
+                </div>
+              </ol>
+              <a href="/accounts/index/"
+                style="color:black; position:relative;left:42vw;font-size:1.5em;">Go Back</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+</body>
+</html>

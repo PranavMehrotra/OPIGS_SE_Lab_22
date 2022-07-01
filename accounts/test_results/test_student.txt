@@ -1,0 +1,20 @@
+Found 1 test(s).
+### Successful Sign up ###
+
+
+### Password mismatch Sign up ###
+<ul class="errorlist"><li>password2<ul class="errorlist"><li>The two password fields didn’t match.</li></ul></li></ul>
+
+
+### Empty field Sign up ###
+<ul class="errorlist"><li>email<ul class="errorlist"><li>This field is required.</li></ul></li><li>contact_number<ul class="errorlist"><li>This field is required.</li></ul></li><li>roll_number<ul class="errorlist"><li>This field is required.</li></ul></li><li>department<ul class="errorlist"><li>This field is required.</li></ul></li></ul>
+
+
+### Roll number doesn't exist in json file Sign up ###
+<ul class="errorlist"><li>roll_number<ul class="errorlist"><li>The Entered data does not match with the records assciated with this Roll Number, please verify the entered details</li></ul></li></ul>
+
+
+### Email doesn't match with the registered email id Sign up ###
+<ul class="errorlist"><li>roll_number<ul class="errorlist"><li>The Entered data does not match with the records assciated with this Roll Number, please verify the entered details</li></ul></li></ul>
+
+

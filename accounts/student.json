@@ -1,0 +1,68 @@
+{
+    "0": {
+        "roll_number": "20CS10079",
+        "first_name": "Angela",
+        "last_name": "Reis",
+        "email": "s1@test.com"
+    },
+    "1": {
+        "roll_number": "20CS10006",
+        "first_name": "James",
+        "last_name": "Lopez",
+        "email": "s2@test.com"
+    },
+    "2": {
+        "roll_number": "20CS10024",
+        "first_name": "Thomas",
+        "last_name": "Uy",
+        "email": "s3@test.com"
+    },
+    "3": {
+        "roll_number": "20CS10060",
+        "first_name": "Jimmy",
+        "last_name": "Swinney",
+        "email": "s4@test.com"
+    },
+    "4": {
+        "roll_number": "20CS10084",
+        "first_name": "Dave",
+        "last_name": "Valencia",
+        "email": "s5@test.com"
+    },
+    "5": {
+        "roll_number": "20CS10076",
+        "first_name": "Ann",
+        "last_name": "Reid",
+        "email": "s6@test.com"
+    },
+    "6": {
+        "roll_number": "20CS10057",
+        "first_name": "Regina",
+        "last_name": "Barriere",
+        "email": "s7@test.com"
+    },
+    "7": {
+        "roll_number": "20CS10037",
+        "first_name": "Jeremy",
+        "last_name": "Edwards",
+        "email": "s8@test.com"
+    },
+    "8": {
+        "roll_number": "20CS10003",
+        "first_name": "Jason",
+        "last_name": "Chamblee",
+        "email": "s9@test.com"
+    },
+    "9": {
+        "roll_number": "20CS10090",
+        "first_name": "Gilbert",
+        "last_name": "Smith",
+        "email": "s10@test.com"
+    },
+    "10": {
+        "roll_number": "20CS10085",
+        "first_name": "Pranav",
+        "last_name": "Mehrotra",
+        "email": "pranavmehrotra123@gmail.com"
+    }
+}
