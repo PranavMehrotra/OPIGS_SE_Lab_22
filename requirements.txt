@@ -2,5 +2,11 @@ Django==4.0.3
 pytz==2020.1
 django-widget-tweaks==1.4.8
 django-sendgrid-v5
-
-#run pip install -r requirements.txt to install requirements
+gunicorn==20.1.0
+django-heroku==0.3.1
+dj-database-url==0.5.0
+psycopg2==2.9.3
+whitenoise==6.0.0
+python-decouple==3.6
+django-environ
+matplotlib==3.5.1

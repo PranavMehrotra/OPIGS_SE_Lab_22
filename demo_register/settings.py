@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import environ
+import django_heroku
+import dj_database_url
+from decouple import config
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,6 +30,10 @@ SECRET_KEY = '62mne3w7&!4kx$uhc-b09rsdvlj#elkng^6klvy*=hza7j=1rr'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# ALLOWED_HOSTS = [
+#     'localhost',
+#     '127.0.0.1'
+# ]
 
 ALLOWED_HOSTS = []
 # Application definition
@@ -48,9 +56,11 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'demo_register.urls'
@@ -124,8 +134,35 @@ LOGOUT_REDIRECT_URL = '/'
 
 STATIC_URL = '/accounts/static/'
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 MEDIA_ROOT = os.path.join(BASE_DIR)
 
 MEDIA_URL = '/document/'
 
 
+#Email Settings
+
+
+
+#SEND_GRID SMTP
+
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
+
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+
+EMAIL_HOST = "smtp.sendgrid.net"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "apikey"
+SENDGRID_API_KEY = env('Send_grid_API_KEY')
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+
+
+
+django_heroku.settings(locals())
