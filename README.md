@@ -10,4 +10,4 @@ http://127.0.0.1:8000/ run this link
 ## https://opigs.herokuapp.com
 
 
-# for better user experience run the link in windows os and keep the browser maximised to full screen
+# For better user experience run the link in windows os and keep the browser maximised to full screen
