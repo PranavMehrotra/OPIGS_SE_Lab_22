@@ -1,4 +1,4 @@
-# OPIGS_SE_Lab
+# OPIGS Software Engineering Lab
 
 # Installing the software for local run
 Go to the directory in which the code is downloaded, then  
