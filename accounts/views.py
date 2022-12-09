@@ -18,7 +18,7 @@ class student_register(CreateView):
     def form_valid(self, form): #form valid check
         user = form.save() #save the form
         login(self.request, user) #login the user
-        return redirect('/accounts/index') #redirect to main index page
+        return redirect('/') #redirect to main index page
     
 class alumni_register(CreateView):
     model = User
@@ -28,7 +28,7 @@ class alumni_register(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('/accounts/index')
+        return redirect('/')
     
 class company_register(CreateView):
     form_class = CompanySignUpForm
@@ -72,7 +72,7 @@ class company_info(CreateView):
         company.is_active=False #company will be active only after manual verification by the admin
         company.save()
         # print(overvie,work_enviro,job_des,other_detail)
-        return redirect('/accounts/index')
+        return redirect('/')
 
 class editStudProfile(CreateView):
     model = Student
@@ -103,7 +103,7 @@ class editStudProfile(CreateView):
             form.fields['department'].widget.attrs['readonly']  =True
             # print(values)
             return render(request,'../templates/edit_details.html',{'whereto':'student_edit','form':form})#display the form in the edit_details.html
-        return redirect('/accounts/index')
+        return redirect('/')
 
     def form_valid(self,form):#form valid function
         if(self.request.user.is_authenticated):
@@ -133,7 +133,7 @@ class editStudProfile(CreateView):
                 student.CV_DA = None
             user.save()
             student.save()
-        return redirect('/accounts/index')
+        return redirect('/')
 
 class editCompProfile(CreateView):
     model = Company
@@ -160,7 +160,7 @@ class editCompProfile(CreateView):
             form.fields['company_name'].widget.attrs['readonly']  =True
             # print(values)
             return render(request,'../templates/edit_details.html',{'whereto':'company_edit','form':form})
-        return redirect('/accounts/index')
+        return redirect('/')
 
     def form_valid(self,form):
         if(self.request.user.is_authenticated):
@@ -176,7 +176,7 @@ class editCompProfile(CreateView):
             company.other_details =other_details
             user.save()
             company.save()
-        return redirect('/accounts/index')
+        return redirect('/')
 
 
 class editAlumProfile(CreateView):
@@ -206,7 +206,7 @@ class editAlumProfile(CreateView):
             form.fields['year_of_graduation'].widget.attrs['readonly']  =True
             # print(values)
             return render(request,'../templates/edit_details.html',{'whereto':'alumni_edit','form':form})
-        return redirect('/accounts/index')
+        return redirect('/')
 
     def form_valid(self,form):
         if(self.request.user.is_authenticated):
@@ -215,7 +215,7 @@ class editAlumProfile(CreateView):
             contact_number = form.save()
             user.contact_number=contact_number
             user.save()
-        return redirect('/accounts/index')
+        return redirect('/')
 
 
 
@@ -228,7 +228,7 @@ def login_request(request):
             user = authenticate(username=username, password=password)#chcek if the entered details are correct
             if user is not None :#if a user with the credential exists
                 login(request,user)#login to that user
-                return redirect('/accounts/index')#redirect to the main page
+                return redirect('/')#redirect to the main page
             else:
                 messages.error(request,"Invalid username or password")#else display error message
         else:
@@ -238,7 +238,7 @@ def login_request(request):
 
 def logout_view(request):#logout request
     logout(request)#logout 
-    return redirect('/accounts/index')#redirect to accounts/index that will call index function
+    return redirect('/')#redirect to accounts/index that will call index function
 
 
 def get_cv(request):
@@ -255,7 +255,7 @@ def get_cv(request):
              """
             notif = Notification.objects.all().order_by('-Date')
             return render(request,'../templates/index.html',{'cvs':cvs,'student':student,'notif':notif})#pass the extracted cv and other parameters required to index.html
-        return redirect('/accounts/index')
+        return redirect('/')
 
 def str_to_lis(s):#to convert a string with comma seperated emails to a list of emails
     if(s==""):
@@ -361,7 +361,7 @@ def list_of_students(request):
                     stud_detail['id']= suser.username
                     list_of_studs.append(stud_detail.copy())#add the relevant details to the list
                 return render(request,'../templates/list_of_students.html',{'whereto':'list_of_students','list_of_studs':list_of_studs,'list_of_short_studs':list_of_short_studs})
-        return redirect('/accounts/index')
+        return redirect('/')
     if(request.method == 'POST'):
         if(request.user.is_authenticated):
             if(request.user.is_company):#if request made by student
@@ -415,7 +415,7 @@ def list_of_students(request):
                             )
                 list_of_short_studs = str_to_lis(comp.list_of_short_students)
                 return render(request,'../templates/list_of_students.html',{'whereto':'list_of_students','list_of_studs':list_of_studs,'list_of_short_studs':list_of_short_studs})
-        return redirect('/accounts/index')
+        return redirect('/')
 
 
 def request_feedback(request):#funct to request feedback from alumni
@@ -423,7 +423,7 @@ def request_feedback(request):#funct to request feedback from alumni
         if(request.user.is_authenticated):
             alum_users = User.objects.filter(is_alumni = True)#extract all alumni
             return render(request,'../templates/request_feedback.html',{'whereto':'request_feedback','alum_users':alum_users})#return the list of alums in case of get request
-        return redirect('/accounts/index')
+        return redirect('/')
 
     if(request.method == 'POST'):#post request would be made once user clicks on button
         if(request.user.is_authenticated):
@@ -431,7 +431,7 @@ def request_feedback(request):#funct to request feedback from alumni
             alum_username = request.POST.get("alum_id")#get the id of the alum using the button clicked
             add_alum_pend(alum_username,request.user)#add it to pending list
             return render(request,'../templates/request_feedback.html',{'whereto':'request_feedback','alum_users':alum_users})
-        return redirect('/accounts/index')
+        return redirect('/')
 
 def feedback(request):#func to give feedback
     if(request.method == 'GET'):
@@ -652,7 +652,7 @@ def apply_company(request):
 
             applied_comps = str_to_lis(student.list_of_comp)
             return render(request,'../templates/apply_company.html',{'whereto':'apply_company','comps':comps,'applied_comps':applied_comps})
-        return redirect('/accounts/index')
+        return redirect('/')
 
     if(request.method == 'POST'):
         if(request.user.is_authenticated):
@@ -676,7 +676,7 @@ def apply_company(request):
 
             applied_comps = str_to_lis(student.list_of_comp)
             return render(request,'../templates/apply_company.html',{'whereto':'apply_company','comp_details_page':'company_details','comps':comps,'applied_comps':applied_comps})
-        return redirect('/accounts/index')
+        return redirect('/')
 
 def company_details(request):
     if(request.method == 'POST'):
@@ -685,9 +685,9 @@ def company_details(request):
             user = User.objects.get(username = comp_username)
             comp = Company.objects.get(user=user)
             return render(request,'../templates/company_details.html',{'comp':comp})
-        return redirect('/accounts/index')
+        return redirect('/')
     else:
-        return redirect('/accounts/index')
+        return redirect('/')
 
 
 def index(request): # to return homepage depending upon the logged in user

@@ -25,7 +25,7 @@ urlpatterns=[
      path('list_of_students/',views.list_of_students, name='list_of_students'),
      path('get_student_cv/',views.get_stud_cv, name='get_stud_cv'),
      path('get_cv/',views.get_cv, name='get_cv'),
-     path('index/',views.index, name='index'),
+     path('',views.index, name='index'),
      path('login/',views.login_request, name='login'),
      path('logout/',views.logout_view, name='logout'),
 ]

@@ -47,7 +47,7 @@ class TestViews(TestCase):
         response = self.client.get(reverse('student_edit'), follow=True)
         last_url, status_code = response.redirect_chain[-1]
         print("### get page redirect and status checked ###")
-        self.assertEquals(last_url,'/accounts/index/')
+        self.assertEquals(last_url,'//')
         self.assertEquals(response.status_code,200)
         
         
@@ -55,14 +55,14 @@ class TestViews(TestCase):
         response = self.client.get(reverse('company_edit'), follow=True)
         last_url, status_code = response.redirect_chain[-1]#helps in extraction of redirected link
         print("### get page redirect and status checked ###")
-        self.assertEquals(last_url,'/accounts/index/')
+        self.assertEquals(last_url,'//')
         self.assertEquals(response.status_code,200)#since follow=true, status_code=200 even though it is a redirected page
         
     def test_alumni_edit_GET(self):
         response = self.client.get(reverse('alumni_edit'), follow=True)
         last_url, status_code = response.redirect_chain[-1]
         print("### get page redirect and status checked ###")
-        self.assertEquals(last_url,'/accounts/index/')
+        self.assertEquals(last_url,'//')
         self.assertEquals(response.status_code,200)
         
     def test_request_feedback_GET(self):

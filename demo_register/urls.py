@@ -19,8 +19,7 @@ from demo_register import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('accounts/', include('accounts.urls')),
-    path('', include('pages.urls')),#page that pops up once the link is clicked
+    path('', include('accounts.urls')),
     path('admin/', admin.site.urls),
 ]
 
