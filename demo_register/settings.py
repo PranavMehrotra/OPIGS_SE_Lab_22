@@ -160,7 +160,9 @@ EMAIL_HOST = "smtp.sendgrid.net"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "apikey"
-SENDGRID_API_KEY = env('Send_grid_API_KEY')
+# Add your SendGrid API Key here, befoer that the email service will not work
+# SENDGRID_API_KEY = env('Send_grid_API_KEY')
+SENDGRID_API_KEY = "demo"   # Comment this and uncomment the above line, to make it work
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 
 
