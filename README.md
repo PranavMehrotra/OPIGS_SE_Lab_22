@@ -9,7 +9,7 @@ Run
 4. http://127.0.0.1:8000/ run this link  
 
 # Software Deployed at
-## https://opigs.herokuapp.com
+## http://opigs2022.pythonanywhere.com/
 
 
 # For better user experience run the link in windows os and keep the browser maximised to full screen
